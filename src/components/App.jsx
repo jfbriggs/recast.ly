@@ -1,11 +1,11 @@
-var App = () => (
+var App = (props) => (
   <div>
     <Nav />
     <div className="col-md-7">
-      <VideoPlayer/>
+      <VideoPlayer video ={props.videos[0]}/>
     </div>
     <div className="col-md-5">
-      <VideoList/>
+      <VideoList videos={props.videos}/>
     </div>
   </div>
 );
@@ -14,4 +14,3 @@ var App = () => (
 // `var` declarations will only exist globally where explicitly defined
 window.App = App;
 
-ReactDOM.render(<App/>, document.getElementById('app'));
