@@ -1,25 +1,28 @@
-// var App = (props) => (
-//   <div>
-//     <Nav />
-//     <div className="col-md-7">
-//       <VideoPlayer video ={props.videos[0]}/>
-//     </div>
-//     <div className="col-md-5">
-//       <VideoList videos={props.videos}/>
-//     </div>
-//   </div>
-// );
-
 class App extends React.Component {
   constructor(props) {
     super(props);
-    // this.data = this.props.searchYouTube();
-    //console.log(this.data);
+    
+  
     this.state = {
-      currentVideo: exampleVideoData[0]
+      currentVideo: exampleVideoData[0],
+      videoList: exampleVideoData  
     };
     this.changeVideo = this.changeVideo.bind(this);
+    this.search = this.search.bind(this);
   }
+
+  search (term) {
+    var context = this;
+    this.props.searchYouTube({key: YOUTUBE_API_KEY, query: term, max: 10}, function(data) {
+      console.log('inner data', data);
+      context.setState({
+        currentVideo: data[0],
+        videoList: data  
+      });    
+    });     
+    this.render();
+  }
+
 
   changeVideo (video) {
     this.setState({
@@ -35,12 +38,12 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Nav />
+        <Nav search={this.search} />
         <div className="col-md-7">
           <VideoPlayer video={this.state.currentVideo}/>
         </div>
         <div className="col-md-5">
-          <VideoList videos={exampleVideoData} changeVideo={this.changeVideo}/>
+          <VideoList videos={this.state.videoList} changeVideo={this.changeVideo}/>
         </div>
       </div>
     );
