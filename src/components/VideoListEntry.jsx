@@ -1,14 +1,23 @@
-var VideoListEntry = (props) => (
-  <div className="video-list-entry">
+var VideoListEntry = (props) => {
+  var selectVideo = () => {
+    console.log('you selected me');
+    //do soemthing that app can pull from. communicate to app
+    console.log('video that was selected', props.video);
+    //send this back out to app
+    props.changeVideo(props.video);
+  };
+
+  return (<div className="video-list-entry">
     <div className="media-left media-middle">
       <img className="media-object" src={props.video.snippet.thumbnails.default.url} alt="" />
     </div>
     <div className="media-body">
-      <div className="video-list-entry-title">{props.video.snippet.title}</div>
+      <div className="video-list-entry-title" onClick={selectVideo}>{props.video.snippet.title}</div>
       <div className="video-list-entry-detail">{props.video.snippet.description}</div>
     </div>
   </div>
-);
+  );
+};
 
 // PropTypes tell other developers what `props` a component expects
 // Warnings will be shown in the console when the defined rules are violated
