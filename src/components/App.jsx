@@ -14,7 +14,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     // this.data = this.props.searchYouTube();
-    console.log(this.data);
+    //console.log(this.data);
     this.state = {
       currentVideo: exampleVideoData[0]
     };
