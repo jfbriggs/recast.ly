@@ -1,11 +1,15 @@
 var Search = (props) => {
   var runSearch = function() {
-    props.search(document.getElementById('searchData').value);  
+    props.search(this.findDOMNode('searchData'));
+    //need to pass in values from textField  
   };
+  // var listFilter = function() {
+  //   props.filterList(document.getElementById('searchData').value);
+  // };
 
 
   return (<div className="search-bar form-inline">
-    <input className="form-control" type="text" id="searchData" />
+    <input className="form-control" type="text" id="searchData" onChange={runSearch} />
     <button className="btn hidden-sm-down" onClick={runSearch}>
       <span className="glyphicon glyphicon-search"></span>
     </button>
